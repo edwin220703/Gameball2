@@ -11,8 +11,9 @@
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\edwin\source\repos\GameBall\GameBall\Resource\CampoDeFutbol.avif"/>
+            <ImageBrush ImageSource="/Campo.jpg"/>
         </Grid.Background>
+        
         <Grid HorizontalAlignment="Center" 
               VerticalAlignment="Center">
             

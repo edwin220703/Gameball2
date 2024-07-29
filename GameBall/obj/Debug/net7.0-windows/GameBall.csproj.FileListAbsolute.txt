@@ -20,3 +20,4 @@ C:\Users\edwin\source\repos\GameBall\GameBall\obj\Debug\net7.0-windows\GameBall.
 C:\Users\edwin\source\repos\GameBall\GameBall\obj\Debug\net7.0-windows\ref\GameBall.dll
 C:\Users\edwin\source\repos\GameBall\GameBall\obj\Debug\net7.0-windows\App.baml
 C:\Users\edwin\source\repos\GameBall\GameBall\obj\Debug\net7.0-windows\Assets\UserControls\BtnMenu.baml
+C:\Users\edwin\source\repos\GameBall\GameBall\obj\Debug\net7.0-windows\GameBall.sourcelink.json

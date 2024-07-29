@@ -28,26 +28,47 @@ namespace GameBall
             {
                 while (GameOver != true)
                 {
-                    for (int i = 0; i < Convert.ToInt16(canvas_Table.ActualWidth-20); i += 5)
+                    for (int i = 0; i < Convert.ToInt16(canvas_Table.ActualWidth - 20); i += 5)
                     {
-
-                        Dispatcher.Invoke(new Action(() =>
+                        try
                         {
-                            Canvas.SetLeft(img_Ball, i);
-                        }));
+                            Dispatcher.Invoke(new Action(() =>
+                            {
+                                Canvas.SetLeft(img_Ball, i);
+                            }));
 
-                        Thread.Sleep(40);
+                            Thread.Sleep(20);
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Dispatcher.Invoke(new Action(() =>
+                            {
+                                Canvas.SetLeft(img_Ball, 0);
+                            }));
+                        }
 
                     }
 
-                    for (int i = Convert.ToInt16(canvas_Table.ActualWidth-20); i > 10; i -= 5)
+                    for (int i = Convert.ToInt16(canvas_Table.ActualWidth - 20); i > 10; i -= 5)
                     {
-                        Dispatcher.Invoke(new Action(() =>
+                        try
                         {
-                            Canvas.SetLeft(img_Ball, i);
-                        }));
+                            Dispatcher.Invoke(new Action(() =>
+                            {
+                                Canvas.SetLeft(img_Ball, i);
+                            }));
 
-                        Thread.Sleep(40);
+                            Thread.Sleep(20);
+                        }
+                        catch (Exception ex)
+                        {
+                            Dispatcher.Invoke(new Action(() =>
+                            {
+                                Canvas.SetLeft(img_Ball, 0);
+                            }));
+                        }
+
                     }
                 }
             });
@@ -68,5 +89,7 @@ namespace GameBall
             GameOver = true;
             btn_Star.IsEnabled = true;
         }
+
+        
     }
 }
