@@ -31,7 +31,7 @@
                                  Height="50"
                                  Name="img_Ball">
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="Resource/Soccer Ball.png"></ImageBrush>
+                                <ImageBrush ImageSource="Resource/Soccer Ball.png" Stretch="Fill" ViewboxUnits="RelativeToBoundingBox" ViewportUnits="RelativeToBoundingBox"></ImageBrush>
                             </Ellipse.Fill>
                         </Ellipse>
                         

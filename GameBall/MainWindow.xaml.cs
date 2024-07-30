@@ -61,7 +61,7 @@ namespace GameBall
                         speedX = new Random().Next(10, 20);
 
                     }
-                    if (Canvas.GetTop(img_Ball) > _hCanvas)
+                    if (Canvas.GetTop(img_Ball) > (_hCanvas-50))
                     {
                         speedY = Convert.ToInt16($"-{new Random().Next(10, 20)}");
                     }
