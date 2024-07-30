@@ -8,7 +8,7 @@
         Title="Game Ball - Inteligencia Artificial" 
         Height="450" 
         Width="800"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Campo.jpg"/>
@@ -22,16 +22,19 @@
                 
                 <Border BorderBrush="White" BorderThickness="2" CornerRadius="20">
                     <Canvas Name="canvas_Table"
-                            Height="250" 
+                            Height="350" 
                             Width="350"
                             Background="Green">
 
 
-                        <Image Name="img_Ball"
-                                   Source="Resource/Soccer Ball.png" 
-                                   Stretch="Fill"
-                                   Width="80"
-                                   Height="80"/>
+                        <Ellipse Width="50"
+                                 Height="50"
+                                 Name="img_Ball">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="Resource/Soccer Ball.png"></ImageBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        
                     </Canvas>
                 </Border>
                 

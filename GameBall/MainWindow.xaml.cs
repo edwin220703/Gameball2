@@ -6,90 +6,104 @@ namespace GameBall
     //Participantes: Edwin De Peña, Kevin Acosta y Florangel Perez
     public partial class MainWindow : Window
     {
-        private static bool GameOver = false;
-        private static Thread thread_Play;
+        private static double _hCanvas;
+        private static double _wCanvas;
+        private static bool _gameOver = true;
+        private static int speedX = 10;
+        private static int speedY = 10;
+        private static Thread thread1;
+
         public MainWindow()
         {
             InitializeComponent();
-            Initialize();
+            InitializeGame();
+        }
+
+        public void InitializeGame()
+        {
+            _gameOver = false;
+            _hCanvas = canvas_Table.Height;
+            _wCanvas = canvas_Table.Width;
+            Canvas.SetTop(img_Ball, _hCanvas / 2);
+            Canvas.SetLeft(img_Ball, _wCanvas / 2);
         }
 
 
-        public void Initialize()
+        public void Update()
         {
-            Canvas.SetTop(img_Ball, (canvas_Table.Height / 2) - 60);
-            btn_Stop.IsEnabled = false;
-        }
-
-
-        public void Loop()
-        {
-            thread_Play = new Thread(() =>
+            thread1 = new Thread(() =>
             {
-                while (GameOver != true)
+                while (_gameOver != true)
                 {
-                    for (int i = 0; i < Convert.ToInt16(canvas_Table.ActualWidth - 20); i += 5)
-                    {
-                        try
-                        {
-                            Dispatcher.Invoke(new Action(() =>
-                            {
-                                Canvas.SetLeft(img_Ball, i);
-                            }));
-
-                            Thread.Sleep(20);
-
-                        }
-                        catch (Exception ex)
-                        {
-                            Dispatcher.Invoke(new Action(() =>
-                            {
-                                Canvas.SetLeft(img_Ball, 0);
-                            }));
-                        }
-
-                    }
-
-                    for (int i = Convert.ToInt16(canvas_Table.ActualWidth - 20); i > 10; i -= 5)
-                    {
-                        try
-                        {
-                            Dispatcher.Invoke(new Action(() =>
-                            {
-                                Canvas.SetLeft(img_Ball, i);
-                            }));
-
-                            Thread.Sleep(20);
-                        }
-                        catch (Exception ex)
-                        {
-                            Dispatcher.Invoke(new Action(() =>
-                            {
-                                Canvas.SetLeft(img_Ball, 0);
-                            }));
-                        }
-
-                    }
+                    Logic();
+                    Thread.Sleep(20);
                 }
             });
 
-            thread_Play.Start();
+            thread1.Start();
+        }
+
+        public void Logic()
+        {
+            try
+            {
+                Dispatcher.Invoke(new Action(() =>
+                {
+
+                    if (Canvas.GetLeft(img_Ball) > _wCanvas)
+                    {
+                        speedX = Convert.ToInt16($"-{new Random().Next(10, 20)}");
+
+                    }
+
+                    if (Canvas.GetLeft(img_Ball) < 0)
+                    {
+                        speedX = new Random().Next(10, 20);
+
+                    }
+                    if (Canvas.GetTop(img_Ball) > _hCanvas)
+                    {
+                        speedY = Convert.ToInt16($"-{new Random().Next(10, 20)}");
+                    }
+
+                    if (Canvas.GetTop(img_Ball) < 0)
+                    {
+                        speedY = new Random().Next(10, 20);
+                    }
+
+                    Canvas.SetLeft(img_Ball, Canvas.GetLeft(img_Ball) + speedX);
+                    Canvas.SetTop(img_Ball, Canvas.GetTop(img_Ball) + speedY);
+
+                    canvas_Table.UpdateLayout();
+                }));
+
+            }
+            catch (Exception ex)
+            {
+    
+            }
         }
 
         private void btn_Star_Click(object sender, RoutedEventArgs e)
         {
-            GameOver = false;
-            Loop();
             btn_Star.IsEnabled = false;
             btn_Stop.IsEnabled = true;
+            _gameOver = false;
+            Update();
+
         }
 
         private void btn_Stop_Click(object sender, RoutedEventArgs e)
         {
-            GameOver = true;
             btn_Star.IsEnabled = true;
+            btn_Stop.IsEnabled = false;
+            _gameOver = true;
+            
         }
 
-        
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            thread1.Interrupt();
+        }
     }
 }
